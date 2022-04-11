@@ -4,6 +4,7 @@ const { cidrToMask, maskToCidr } = require("../controllers/convertions");
 const { auth } = require("../middlewares/auth");
 
 exports.init = (app) => {
+  app.get("/", healthCheck);
   app.post("/login", login);
   app.post("/signup", signup);
   app.get("/_health", healthCheck);
