@@ -1,13 +1,15 @@
-  
-const express = require('express');
-const app = express();
-const bodyParser = require('body-parser');
+const express = require("express");
+const bodyParser = require("body-parser");
+const db = require("./models");
+const errors = require("./middlewares/errors");
+const routes = require("./routes/routes");
 
-import * as routes from './routes/routes';
+const app = express();
+db.sequelize.sync();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 routes.init(app);
 
+app.use(errors.handle);
 
-
-export default app;
+module.exports = app;
