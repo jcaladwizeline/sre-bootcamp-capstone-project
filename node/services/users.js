@@ -1,7 +1,7 @@
 const models = require("../models");
 const config = require("../config").secret;
 const bcrypt = require("bcrypt");
-const { databaseError, forbidden } = require("../helpers/errors");
+const { databaseError, badRequest } = require("../helpers/errors");
 const jwt = require("jsonwebtoken");
 
 exports.login = async (username, password) => {
@@ -16,7 +16,7 @@ exports.login = async (username, password) => {
         const token = jwt.sign({ id, username }, config.JWT);
         return { username, token };
       } else {
-        throw forbidden("user or password are incorrect");
+        throw badRequest("user or password are incorrect");
       }
     } else {
       throw databaseError("database error");

@@ -1,5 +1,5 @@
-import Config from "config";
-import app from "./server";
+const Config = require("config");
+const app = require("./server");
 
 let config = Config;
 

@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 const config = require("../config").secret;
 const models = require("../models");
-const { forbidden } = require("../helpers/errors");
+const { authenticationError } = require("../helpers/errors");
 
 exports.auth = async (req, res, next) => {
   const { user: userModel } = models;
@@ -12,13 +12,13 @@ exports.auth = async (req, res, next) => {
   ) {
     token = req.headers.authorization.split(" ")[1];
   }
-  if (!token) next(forbidden("a"));
+  if (!token) next(authenticationError("User is not authorized"));
   try {
     const decoded = await jwt.verify(token, config.JWT);
     const user = await userModel.findByPk(decoded.id);
     req.user = user;
   } catch (e) {
-    next(forbidden("b"));
+    next(authenticationError("User is not authorized"));
   }
   req.token = token;
   next();

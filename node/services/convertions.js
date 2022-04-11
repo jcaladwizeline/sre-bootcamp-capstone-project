@@ -1,5 +1,4 @@
-const bcrypt = require("bcrypt");
-const { databaseError, forbidden } = require("../helpers/errors");
+const { badRequest, forbidden } = require("../helpers/errors");
 
 exports.cidrToMaskService = async (value) => {
   const mask = [];
@@ -12,8 +11,8 @@ exports.cidrToMaskService = async (value) => {
       mask.push(256 - Math.pow(2, 8 - n));
       value -= n;
     }
-    return { input: cidr, output: mask.join(".") };
-  } else return "mal";
+    return { function: "cidrToMask", input: cidr, output: mask.join(".") };
+  } else throw badRequest("the param value must be exist or has bad format");
 };
 
 exports.maskToCidrService = async (value) => {
@@ -26,9 +25,10 @@ exports.maskToCidrService = async (value) => {
       const value_valid = validChars.test(maskNodes[i]);
       if (value_valid && maskNodes[i] >= 0 && maskNodes[i] <= 255) {
         cidr += ((maskNodes[i] >>> 0).toString(2).match(/1/g) || []).length;
-      } else return "mal";
+      } else
+        throw badRequest("the param value must be exist or has bad format");
     }
-    return { input: mask, output: cidr };
+    return { function: "maskToCidr", input: mask, output: cidr };
   }
-  return "mal";
+  throw badRequest("the param value must be exist or has bad format");
 };

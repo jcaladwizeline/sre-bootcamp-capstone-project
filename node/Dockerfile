@@ -12,7 +12,7 @@ RUN npm install
 COPY . .
 
 EXPOSE 8000
-CMD [ "node", "server.js" ]
+CMD [ "node", "index.js" ]
 
 # App must run on port 8000
 # Add your instructions to dockerize the application
