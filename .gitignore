@@ -54,4 +54,4 @@ __pycache__/
 provision/.*/*
 
 provision/terraform/destroy-candidate.sh
-config/config.json
+config.json

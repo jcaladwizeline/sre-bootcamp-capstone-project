@@ -1,8 +1,8 @@
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 const models = require("../models");
 const config = require("../config").secret;
-const bcrypt = require("bcrypt");
 const { databaseError, badRequest } = require("../helpers/errors");
-const jwt = require("jsonwebtoken");
 
 exports.login = async (username, password) => {
   const { user } = models;
@@ -11,8 +11,8 @@ exports.login = async (username, password) => {
     const response = await user.findOne({ where: { username: username } });
     if (response) {
       const { username, password: userPassword, id } = response;
-      const password_valid = await bcrypt.compare(password, userPassword);
-      if (password_valid) {
+      const passwordValid = await bcrypt.compare(password, userPassword);
+      if (passwordValid) {
         const token = jwt.sign({ id, username }, config.JWT);
         return { username, token };
       } else {
