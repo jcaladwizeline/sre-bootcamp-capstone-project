@@ -32,5 +32,5 @@ npm start
 ### Docker
 
 ```bash
-docker run -e DB_HOST=mentoring.chezv7d8o5zi.us-east-1.rds.amazonaws.com -e DB_PORT=5432 -e DB_USER=postgres -e DB_PASSWORD=postgres -e DB_DATABASE=postgres -e DIALECT=postgres -e JWT_KEY=the-jwt-key --name nodejs-image-demo5 -p 8000:8000 -d caladdd/sre_caladdd
+docker run -e DB_HOST= -e DB_PORT= -e DB_USER= -e DB_PASSWORD= -e DB_DATABASE= -e DIALECT= -e JWT_KEY= --name nodejs-image-demo -p 8000:8000 -d your_dockerhub_username/nodejs-image-demo
 ```
