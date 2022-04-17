@@ -15,7 +15,6 @@ cp .env.example
 ```
 
 Remplace the values of the vars in the .env file.
-Also you have to replace some values to connect to the database in config/config.json
 
 ### Run proyect.
 
