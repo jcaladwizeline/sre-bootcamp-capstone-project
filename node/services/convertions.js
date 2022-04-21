@@ -1,4 +1,5 @@
 const { badRequest } = require("../helpers/errors");
+const { maskMap } = require("../helpers/maskCheck");
 
 exports.cidrToMaskService = async (value) => {
   const mask = [];
@@ -17,18 +18,7 @@ exports.cidrToMaskService = async (value) => {
 
 exports.maskToCidrService = async (value) => {
   const mask = value;
-  const validChars = /^[0-9]*$/;
-  const maskNodes = mask.split(".");
-  if (maskNodes.length === 4) {
-    let cidr = 0;
-    for (let i in maskNodes) {
-      const valueValid = validChars.test(maskNodes[i]);
-      if (valueValid && maskNodes[i] >= 0 && maskNodes[i] <= 255) {
-        cidr += ((maskNodes[i] >>> 0).toString(2).match(/1/g) || []).length;
-      } else
-        throw badRequest("the param value must be exist or has bad format");
-    }
-    return { function: "maskToCidr", input: mask, output: cidr };
-  }
-  throw badRequest("the param value must be exist or has bad format");
+  const cidr = maskMap[value];
+  if (cidr) return { function: "maskToCidr", input: mask, output: cidr };
+  else throw badRequest("the param value must be exist or has bad format");
 };

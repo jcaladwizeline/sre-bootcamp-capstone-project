@@ -9,7 +9,9 @@
     "dev": "nodemon --exec babel-node ./index.js ",
     "lint": "eslint \"**/*.js\" --ignore-pattern ./.eslint.json",
     "migrations": "sequelize db:migrate",
-    "undo-migrations": "sequelize db:migrate:undo"
+    "undo-migrations": "sequelize db:migrate:undo",
+    "make-seed": "npx sequelize seed:generate --name users",
+    "seed": "npx sequelize db:seed:all"
   },
   "repository": {
     "type": "git",

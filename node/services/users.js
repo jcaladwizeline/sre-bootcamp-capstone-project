@@ -1,4 +1,3 @@
-const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const models = require("../models");
 const config = require("../config").secret;
@@ -28,11 +27,9 @@ exports.login = async (username, password) => {
 
 exports.signup = async (username, password) => {
   const { user } = models;
-  const salt = await bcrypt.genSalt(10);
-  const passwordHashed = await bcrypt.hash(password, salt);
 
   return user
-    .create({ username, password: passwordHashed })
+    .create({ username, password: password })
     .then((data) => {
       return data;
     })
