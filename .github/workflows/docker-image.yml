@@ -63,6 +63,12 @@ jobs:
       - name: Install Dependencies
         working-directory: ./node
         run: npm install
+        
+        
+      # Copy node env
+      - name: Copy node env
+        working-directory: ./node
+        run: cp .env.example .env
 
       # Finally, run our tests
       - name: Run the tests
