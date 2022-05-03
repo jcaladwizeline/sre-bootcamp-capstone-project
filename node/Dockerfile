@@ -4,12 +4,12 @@ FROM node:14.19-alpine
 WORKDIR /app
 
 # Install app dependencies
-COPY ["package.json", ""]
+COPY ["node/package.json", ""]
 
 RUN npm install
 
 # Bundle app source
-COPY . .
+COPY ["node",""]
 
 EXPOSE 8000
 CMD [ "node", "index.js" ]
