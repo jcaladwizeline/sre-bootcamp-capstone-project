@@ -1,5 +1,5 @@
 FROM node:14.19-alpine
-RUN apk add g++ make python
+RUN apk update && apk upgrade && apk add python3 make g++
 
 # Create app directory
 WORKDIR /app
