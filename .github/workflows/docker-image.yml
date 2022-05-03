@@ -49,9 +49,8 @@ jobs:
           flags: 'g'
 
       - name: Generate Deployment Package
-        run: |
-              cd node
-              zip -r deploy.zip * -x "**node_modules**"
+        working-directory: ./node
+        run: zip -r deploy.zip * -x "**node_modules**"
         
       - name: Deploy to EB
         uses: einaregilsson/beanstalk-deploy@v16
@@ -62,6 +61,6 @@ jobs:
           environment_name: Testing-env
           version_label: "docker-app-${{ steps.format-time.outputs.replaced }}"
           region: us-east-1
-          deployment_package: deploy.zip
+          deployment_package: node/deploy.zip
 
     
