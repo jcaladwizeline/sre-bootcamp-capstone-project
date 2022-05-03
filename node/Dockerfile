@@ -5,12 +5,12 @@ RUN apk update && apk upgrade && apk add python3 make g++
 WORKDIR /app
 
 # Install app dependencies
-COPY ["node/package.json", ""]
+COPY ["package.json", ""]
 
 RUN npm install
 
 # Bundle app source
-COPY ["node",""]
+COPY ["",""]
 
 EXPOSE 8000
 CMD [ "node", "index.js" ]
