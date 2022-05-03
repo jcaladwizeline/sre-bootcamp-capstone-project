@@ -1,10 +1,10 @@
 FROM node:14.19-alpine
 
 # Create app directory
-WORKDIR /usr/src/app
+WORKDIR /app
 
 # Install app dependencies
-COPY package*.json ./
+COPY ["package.json", ""]
 
 RUN npm install
 
