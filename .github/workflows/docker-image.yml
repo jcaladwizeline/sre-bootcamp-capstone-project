@@ -49,7 +49,8 @@ jobs:
           flags: 'g'
 
       - name: Generate Deployment Package
-        run: zip -r deploy.zip node/* -x "**node_modules**"
+        working-directory: ./node
+        run: zip -r deploy.zip * -x "**node_modules**"
         
       - name: Deploy to EB
         uses: einaregilsson/beanstalk-deploy@v16
