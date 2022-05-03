@@ -36,7 +36,7 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           
   test:
-    name: test application
+    name: Test application
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -67,7 +67,7 @@ jobs:
       # Finally, run our tests
       - name: Run the tests
         working-directory: ./node
-        run: npm test
+        run: npm run test
         
   deploy:
     name: Deploy to Elastic Beanstalk
