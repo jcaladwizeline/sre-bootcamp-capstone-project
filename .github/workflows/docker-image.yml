@@ -65,6 +65,7 @@ jobs:
         uses: wearerequired/lint-action@v2
         with:
           eslint: true
+          eslint_dir: ./node
         
       ###### Testing  
       # Copy node env
