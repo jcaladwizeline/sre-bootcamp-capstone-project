@@ -7,10 +7,10 @@ exports.auth = async (req, res, next) => {
   const { user: userModel } = models;
   let token;
   if (
-    req.headers.authorization &&
-    req.headers.authorization.startsWith("Bearer")
+    req.headers.authorization
+    && req.headers.authorization.startsWith("Bearer")
   ) {
-    token = req.headers.authorization.split(" ")[1];
+    [, token] = req.headers.authorization.split(" ");
   }
   if (!token) next(authenticationError("User is not authorized"));
   try {

@@ -1,3 +1,4 @@
+/*eslint no-shadow: 2*/
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const models = require("../models");
@@ -6,35 +7,26 @@ const { databaseError, badRequest } = require("../helpers/errors");
 
 exports.login = async (username, password) => {
   const { user } = models;
-
-  try {
-    const response = await user.findOne({ where: { username: username } });
-    if (response) {
-      const { username, password: userPassword, id } = response;
-      const passwordValid = await bcrypt.compare(password, userPassword);
-      if (passwordValid) {
-        const token = jwt.sign({ id, username }, config.JWT);
-        return { data: token };
-      } else {
-        throw badRequest("user or password are incorrect");
-      }
-    } else {
-      throw databaseError("database error");
+  const response = await user.findOne({ where: { username } });
+  if (response) {
+    const { username: userN, password: userPassword, id } = response;
+    const passwordValid = await bcrypt.compare(password, userPassword);
+    if (passwordValid) {
+      const token = jwt.sign({ id, username: userN }, config.JWT);
+      return { data: token };
     }
-  } catch (e) {
-    throw e;
+    throw badRequest("user or password are incorrect");
   }
+  throw databaseError("database error");
 };
 
 exports.signup = async (username, password) => {
   const { user } = models;
 
   return user
-    .create({ username, password: password })
-    .then((data) => {
-      return data;
-    })
-    .catch((e) => {
+    .create({ username, password })
+    .then((data) => data)
+    .catch(() => {
       throw databaseError("database error");
     });
 };

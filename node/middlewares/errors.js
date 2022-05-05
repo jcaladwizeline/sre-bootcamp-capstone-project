@@ -11,8 +11,7 @@ const statusCodes = {
 };
 
 exports.handle = (error, req, res, next) => {
-  if (error.internalCode)
-    res.status(statusCodes[error.internalCode] || DEFAULT_STATUS_CODE);
+  if (error.internalCode) res.status(statusCodes[error.internalCode] || DEFAULT_STATUS_CODE);
   else {
     next(error);
     res.status(DEFAULT_STATUS_CODE);
