@@ -106,8 +106,8 @@ jobs:
         with:
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          application_name: testing
-          environment_name: Testing-env
+          application_name: ${{ secrets.EBS_APP }}
+          environment_name: ${{ secrets.EBS_ENV }}
           version_label: "docker-app-${{ steps.format-time.outputs.replaced }}"
           region: us-east-1
           deployment_package: node/deploy.zip
