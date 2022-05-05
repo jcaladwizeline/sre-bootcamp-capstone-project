@@ -35,7 +35,7 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           
-      ###### Testing    
+      ###### Setup Node.js for linting and testing    
       - name: Setup Node.js
         uses: actions/setup-node@v1
         with:
@@ -60,7 +60,13 @@ jobs:
         working-directory: ./node
         run: npm install
         
+      ###### Linting
+      - name: Run linters
+        uses: wearerequired/lint-action@v2
+        with:
+          eslint: true
         
+      ###### Testing  
       # Copy node env
       - name: Copy node env
         working-directory: ./node
